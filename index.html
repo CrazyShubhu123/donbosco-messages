@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Don Bosco & Dominic Savio — Responsive Fix</title>
+  <style>
+    /* Scoped base */
+    :root {
+      --bg: #0A1C2E;
+      --card-bg: rgba(255,255,255,0.05);
+      --card-border: rgba(255,255,255,0.08);
+      --accent: #D81B60;
+      --text: #e6eef8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Lato", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding: 2.5rem 1rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Container scope so nothing clashes */
+    .saint-section {
+      width: 100%;
+      max-width: 1100px;
+      display: grid;
+      gap: 2.5rem;
+    }
+
+    .saintcard {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 1.8rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+      transition: transform .22s ease, box-shadow .22s ease;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      animation: fadeIn 0.6s ease both;
+    }
+
+    .saintcard:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+    }
+
+    .saintcard-header {
+      text-align: center;
+      margin-bottom: 0.4rem;
+    }
+
+    .saintcard-header h1 {
+      font-family: "Playfair Display", serif;
+      color: #fff;
+      font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+      letter-spacing: 0.2px;
+      display: inline-block;
+      padding-bottom: .4rem;
+      border-bottom: 3px solid var(--accent);
+    }
+
+    /* Main layout: image + text row */
+    .saint-image-and-text {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;           /* <-- VERTICAL CENTERING when side-by-side */
+      justify-content: flex-start;
+    }
+
+    /* Image column */
+    .saint-img-name {
+      flex: 0 0 220px;               /* fixed-ish column for images on wide screens */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: .6rem;
+      padding-top: 0.15rem;
+    }
+
+    .saint-img-name img {
+      width: 200px;
+      height: auto;
+      border-radius: 14px;
+      display: block;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+      transition: transform .25s ease, box-shadow .25s ease;
+      object-fit: cover;
+    }
+
+    .saint-img-name img:focus,
+    .saint-img-name img:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 14px 42px rgba(216,27,96,0.18);
+    }
+
+    .saint-name {
+      color: #f5f8fb;
+      font-weight: 700;
+      font-size: clamp(.98rem, 1.6vw, 1.08rem);
+    }
+
+    /* Text column */
+    .saint-text {
+      flex: 1 1 0;
+      text-align: left;
+    }
+
+    /* Responsive-friendly readable typography:
+       clamp(min, preferred viewport unit, max) ensures text is legible across devices */
+    .saintMsg {
+      color: var(--text);
+      margin-bottom: 1rem;
+      line-height: 1.72;
+      font-size: clamp(1rem, 2.8vw, 1.06rem); /* increases on small narrow screens */
+    }
+
+    .saintMsg b { color: var(--accent); font-weight:700; }
+
+    /* EXTRA: make the long paragraphs break nicely on narrow dual-screen devices */
+    .saint-text p { hyphens: auto; }
+
+    /* --------- MEDIA QUERIES --------- */
+
+    /* For medium/narrow screens (phones, Surface Duo single-panel, small tablets)
+       we stack vertically and center the image above the text. */
+    @media (max-width: 900px) {
+      .saintcard {
+        padding: 1.4rem;
+      }
+
+      .saint-image-and-text {
+        flex-direction: column;
+        align-items: center;     /* image centered horizontally */
+        text-align: center;
+      }
+
+      .saint-img-name {
+        order: 0;
+        flex: none;
+        width: 100%;
+      }
+
+      .saint-img-name img {
+        width: clamp(140px, 28vw, 180px); /* responsive image size on phones */
+      }
+
+      .saint-text {
+        order: 1;
+        width: 100%;
+      }
+
+      /* on these narrow devices, increase font slightly so text isn't tiny */
+      .saintMsg {
+        font-size: clamp(1.02rem, 3.6vw, 1.08rem);
+      }
+    }
+
+    /* For very narrow phones (iPhone SE-type), keep everything readable */
+    @media (max-width: 420px) {
+      body { padding: 1.25rem; }
+      .saintcard { padding: 1.1rem; border-radius: 14px; }
+      .saintcard-header h1 { font-size: 1.35rem; }
+      .saint-img-name img { width: clamp(120px, 32vw, 160px); }
+      .saintMsg { font-size: clamp(1.02rem, 4.2vw, 1.04rem); line-height:1.65; }
+    }
+
+    /* For landscape on very short wide devices (Surface Duo landscape split),
+       ensure side-by-side layout stays centered vertically. */
+    @media (min-width: 901px) and (max-width: 1100px) {
+      .saint-image-and-text { align-items: center; }
+      .saint-img-name img { width: 180px; }
+      .saintMsg { font-size: clamp(1rem, 1.6vw, 1.02rem); }
+    }
+
+    /* keyframes */
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px) } to { opacity:1; transform:none } }
+  </style>
+</head>
+<body>
+  <main class="saint-section" aria-labelledby="saints-title">
+    <!-- Don Bosco -->
+    <article class="saintcard" aria-labelledby="donbosco-title">
+      <header class="saintcard-header">
+        <h1 id="donbosco-title">Don Bosco</h1>
+      </header>
+
+      <div class="saint-image-and-text">
+        <div class="saint-img-name" aria-hidden="false">
+          <!-- use correct paths on your site -->
+          <img src="st-don-bosco.png" alt="Saint John Bosco portrait" />
+          <div class="saint-name">St. John Bosco</div>
+        </div>
+
+        <div class="saint-text">
+          <p class="saintMsg">
+            <b>John Bosco</b>, the father and friend of youth was born on August 16, 1815,
+            in a peasant family in the little hamlet of Becchi, some 20 kilometers from Turin, Italy.
+            When John was only two years old his father, Francis Bosco, passed away. His grief-stricken
+            mother, Margaret Occiena Bosco, had a harrowing time to bring him up.
+          </p>
+          <p class="saintMsg">
+            To complete his education John had to do his share of work on the family farm and study during
+            his spare time. Working as a servant, teaching, assisting a tailor, doing chores for a blacksmith,
+            and keeping score at a billiard table were some of the things he did in order to pay for his food,
+            lodging, and tuition while at school. In due course John entered the seminary and was ordained a
+            priest on June 5, 1841. From then on he was known as Don Bosco (Father Bosco).
+          </p>
+          <p class="saintMsg">
+            Don Bosco’s work for boys started with one boy, a mason’s apprentice. Soon this boy brought others
+            and the number of Don Bosco’s friends multiplied. He gave them facilities for games and taught them
+            their religion.
+          </p>
+          <p class="saintMsg">
+            Don Bosco called his method of education the Preventive System, based on REASON, RELIGION, and KINDNESS.
+            He told his disciples that education was to be based on love, on selfless service for the mental, emotional,
+            moral, and spiritual growth of the pupils.
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Dominic Savio -->
+    <article class="saintcard" aria-labelledby="dominic-title">
+      <header class="saintcard-header">
+        <h1 id="dominic-title">St. Dominic Savio</h1>
+      </header>
+
+      <div class="saint-image-and-text">
+        <div class="saint-img-name">
+          <img src="st-dominic-savio.png" alt="Saint Dominic Savio portrait" />
+          <div class="saint-name">St. Dominic Savio</div>
+        </div>
+
+        <div class="saint-text">
+          <p class="saintMsg">
+            <b>Dominic Savio</b> (Italian: Domenico Savio; April 2, 1842 – March 9, 1857) was an Italian adolescent
+            student of Saint John Bosco. He was in the boarding house of Don Bosco when he became ill and died at the
+            age of 14. His teacher, John Bosco, had very high regard for Savio, and wrote a biography of his young
+            student, <i>The Life of Dominic Savio</i>. This volume, along with other accounts of him, were critical
+            factors in his cause for sainthood.
+          </p>
+          <p class="saintMsg">
+            Despite the fact that many people considered him to have died at too young an age – fourteen – to be considered
+            for sainthood, he was considered eligible for such singular honour on the basis of his having displayed "heroic virtue"
+            in his everyday life.
+          </p>
+          <p class="saintMsg">
+            He is the only saint of his age group, which includes Maria Goretti (age 11) and Ponticus of Lyons (age 15),
+            who was declared to be a saint not on the basis of martyrdom, but on the basis of having lived what was seen
+            as a holy life.
+          </p>
+          <p class="saintMsg">
+            He was canonised a Saint on June 12, 1954 by Pope Pius XII, making him the youngest non-martyr to be canonised
+            in the Catholic Church.
+          </p>
+        </div>
+      </div>
+    </article>
+  </main>
+</body>
+</html>
