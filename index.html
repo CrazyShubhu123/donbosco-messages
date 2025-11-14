@@ -185,9 +185,107 @@
 
     /* keyframes */
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px) } to { opacity:1; transform:none } }
+    .read-more-btn {
+  margin-top: 1.2rem;
+  background-color: #D81B60;
+  color: #fff;
+  padding: 0.7rem 1.5rem;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.read-more-btn:hover {
+  opacity: 0.8;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(4px);
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  width: 90%;
+  max-width: 600px;
+  background: #0A1C2E;
+  padding: 2rem;
+  border-radius: 20px;
+  color: white;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.45);
+  animation: fadeUp 0.35s ease;
+}
+
+.modal-content h2 {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  border-bottom: 2px solid #D81B60;
+  padding-bottom: 0.5rem;
+}
+
+.close {
+  float: right;
+  font-size: 2.2rem;
+  cursor: pointer;
+  color: #fff;
+  margin-top: -10px;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
   </style>
 </head>
 <body>
+  <div class="modal" id="bosco-modal">
+    <div class="modal-content">
+      <span class="close" data-close="bosco-modal">&times;</span>
+      <h2>More About Don Bosco</h2>
+      <p>
+        John Bosco, the father and friend of youth was born on August 16, 1815, in a peasant family in the little hamlet of Becchi, some 20 kilometers from Turin, Italy. When John was only two years old his father, Francis Bosco, passed away. His grief-stricken mother, Margaret Occiena Bosco, had a harrowing time to bring him up.
+
+To complete his education John had to do his share of work on the family farm and study during his spare time. Working as a servant, teaching, assisting a tailor, doing chores for a blacksmith, and keeping score at a billiard table were some of the things he did in order to pay for his food, lodging, and tuition while at school. In due course John entered the seminary and was ordained a priest on June 5, 1841. From then on he was known as Don Bosco (Father Bosco).
+
+Don Bosco’s work for boys started with one boy, a mason’s apprentice. Soon this boy brought others and the number of Don Bosco’s friends multiplied. He gave them facilities for games and taught them their religion.
+
+Don Bosco called his method of education the Preventive System, based on REASON, RELIGION, and KINDNESS. He told his disciples that education was to be based on love, on selfless service for the mental, emotional, moral, and spiritual growth of the pupils.
+
+Read More
+      </p>
+    </div>
+  </div>
+
+  <div class="modal" id="savio-modal">
+    <div class="modal-content">
+      <span class="close" data-close="savio-modal">&times;</span>
+      <h2>More About St. Dominic Savio</h2>
+      <p>
+        Dominic Savio (Italian: Domenico Savio; April 2, 1842 – March 9, 1857) was an Italian adolescent student of Saint John Bosco. He was in the boarding house of Don Bosco when he became ill and died at the age of 14. His teacher, John Bosco, had very high regard for Savio, and wrote a biography of his young student, The Life of Dominic Savio. This volume, along with other accounts of him, were critical factors in his cause for sainthood.
+
+Despite the fact that many people considered him to have died at too young an age – fourteen – to be considered for sainthood, he was considered eligible for such singular honour on the basis of his having displayed "heroic virtue" in his everyday life.
+
+He is the only saint of his age group, which includes Maria Goretti (age 11) and Ponticus of Lyons (age 15), who was declared to be a saint not on the basis of martyrdom, but on the basis of having lived what was seen as a holy life.
+
+He was canonised a Saint on June 12, 1954 by Pope Pius XII, making him the youngest non-martyr to be canonised in the Catholic Church.
+
+Read More
+      </p>
+    </div>
+  </div>
+  
   <main class="saint-section" aria-labelledby="saints-title">
     <!-- Don Bosco -->
     <article class="saintcard" aria-labelledby="donbosco-title">
@@ -207,25 +305,10 @@
             <b>John Bosco</b>, the father and friend of youth was born on August 16, 1815,
             in a peasant family in the little hamlet of Becchi, some 20 kilometers from Turin, Italy.
             When John was only two years old his father, Francis Bosco, passed away. His grief-stricken
-            mother, Margaret Occiena Bosco, had a harrowing time to bring him up.
+            mother, Margaret Occiena Bosco, had a harrowing time to bring him up ...
           </p>
-          <p class="saintMsg">
-            To complete his education John had to do his share of work on the family farm and study during
-            his spare time. Working as a servant, teaching, assisting a tailor, doing chores for a blacksmith,
-            and keeping score at a billiard table were some of the things he did in order to pay for his food,
-            lodging, and tuition while at school. In due course John entered the seminary and was ordained a
-            priest on June 5, 1841. From then on he was known as Don Bosco (Father Bosco).
-          </p>
-          <p class="saintMsg">
-            Don Bosco’s work for boys started with one boy, a mason’s apprentice. Soon this boy brought others
-            and the number of Don Bosco’s friends multiplied. He gave them facilities for games and taught them
-            their religion.
-          </p>
-          <p class="saintMsg">
-            Don Bosco called his method of education the Preventive System, based on REASON, RELIGION, and KINDNESS.
-            He told his disciples that education was to be based on love, on selfless service for the mental, emotional,
-            moral, and spiritual growth of the pupils.
-          </p>
+         
+          <button class="read-more-btn" data-modal="bosco-modal">Read More</button>
         </div>
       </div>
     </article>
@@ -248,25 +331,34 @@
             student of Saint John Bosco. He was in the boarding house of Don Bosco when he became ill and died at the
             age of 14. His teacher, John Bosco, had very high regard for Savio, and wrote a biography of his young
             student, <i>The Life of Dominic Savio</i>. This volume, along with other accounts of him, were critical
-            factors in his cause for sainthood.
+            factors in his cause for sainthood ...
           </p>
-          <p class="saintMsg">
-            Despite the fact that many people considered him to have died at too young an age – fourteen – to be considered
-            for sainthood, he was considered eligible for such singular honour on the basis of his having displayed "heroic virtue"
-            in his everyday life.
-          </p>
-          <p class="saintMsg">
-            He is the only saint of his age group, which includes Maria Goretti (age 11) and Ponticus of Lyons (age 15),
-            who was declared to be a saint not on the basis of martyrdom, but on the basis of having lived what was seen
-            as a holy life.
-          </p>
-          <p class="saintMsg">
-            He was canonised a Saint on June 12, 1954 by Pope Pius XII, making him the youngest non-martyr to be canonised
-            in the Catholic Church.
-          </p>
+        
+          <button class="read-more-btn" data-modal="savio-modal">Read More</button>
         </div>
       </div>
     </article>
   </main>
+  <script>
+  document.querySelectorAll(".read-more-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const modalId = btn.getAttribute("data-modal");
+      document.getElementById(modalId).style.display = "flex";
+    });
+  });
+
+  document.querySelectorAll(".close").forEach(closeBtn => {
+    closeBtn.addEventListener("click", () => {
+      const modalId = closeBtn.getAttribute("data-close");
+      document.getElementById(modalId).style.display = "none";
+    });
+  });
+
+  window.addEventListener("click", e => {
+    document.querySelectorAll(".modal").forEach(modal => {
+      if (e.target === modal) modal.style.display = "none";
+    });
+  });
+</script>
 </body>
 </html>
