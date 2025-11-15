@@ -4,6 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Don Bosco & Dominic Savio — Responsive Fix</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
     /* Scoped base */
     :root {
@@ -17,7 +20,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: "Lato", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      font-family: "Playfair Display", serif;
       background: var(--bg);
       color: var(--text);
       -webkit-font-smoothing:antialiased;
@@ -56,17 +59,18 @@
 
     .saintcard-header {
       text-align: center;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.6rem;
     }
 
     .saintcard-header h1 {
       font-family: "Playfair Display", serif;
-      color: #fff;
+      color: #3399FF;
       font-size: clamp(1.5rem, 2.6vw, 2.2rem);
       letter-spacing: 0.2px;
       display: inline-block;
       padding-bottom: .4rem;
-      border-bottom: 3px solid var(--accent);
+      /* border-bottom: 3px solid var(--accent); */
+      font-weight: 900;
     }
 
     /* Main layout: image + text row */
@@ -89,7 +93,7 @@
     }
 
     .saint-img-name img {
-      width: 200px;
+      width: 160px;
       height: auto;
       border-radius: 14px;
       display: block;
@@ -106,7 +110,7 @@
 
     .saint-name {
       color: #f5f8fb;
-      font-weight: 700;
+      font-weight: 800;
       font-size: clamp(.98rem, 1.6vw, 1.08rem);
     }
 
@@ -114,6 +118,7 @@
     .saint-text {
       flex: 1 1 0;
       text-align: left;
+      font-size: larger;
     }
 
     /* Responsive-friendly readable typography:
@@ -186,19 +191,20 @@
     /* keyframes */
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px) } to { opacity:1; transform:none } }
     .read-more-btn {
-  margin-top: 1.2rem;
-  background-color: #3399FF;
-  color: #fff;
-  padding: 0.7rem 1.5rem;
-  font-size: 1.1rem;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
+      margin-top: 1.2rem;
+      background-color: #0A1C2E;
+      color: #fff;
+      padding: 0.7rem 1.5rem;
+      font-size: large;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      align-self: right;
+    }
 
 .read-more-btn:hover {
-  opacity: 0.8;
+  opacity: 1;
 }
 
 /* Modal */
@@ -247,7 +253,13 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+.read-more-div{
+  display: flex;
+  justify-content: flex-end;
+}
+
   </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
   <div class="modal" id="bosco-modal">
@@ -263,7 +275,6 @@ Don Bosco’s work for boys started with one boy, a mason’s apprentice. Soon t
 
 Don Bosco called his method of education the Preventive System, based on REASON, RELIGION, and KINDNESS. He told his disciples that education was to be based on love, on selfless service for the mental, emotional, moral, and spiritual growth of the pupils.
 
-Read More
       </p>
     </div>
   </div>
@@ -305,10 +316,14 @@ Read More
             <b>John Bosco</b>, the father and friend of youth was born on August 16, 1815,
             in a peasant family in the little hamlet of Becchi, some 20 kilometers from Turin, Italy.
             When John was only two years old his father, Francis Bosco, passed away. His grief-stricken
-            mother, Margaret Occiena Bosco, had a harrowing time to bring him up ...
+            mother, Margaret Occiena Bosco, had a harrowing time to bring him up. To complete his education John had to do his share of work on the family farm and study during his spare time. Working as a servant, teaching, assisting a tailor, doing chores for a blacksmith, and keeping score at a billiard table were some of the things he did in order to pay for his food, lodging, and tuition while at school. In due course John entered the seminary and was ordained a priest on June 5, 1841. From then on he was known as Don Bosco (Father Bosco) ...
           </p>
          
-          <button class="read-more-btn" data-modal="bosco-modal">Read More</button>
+          <div class="read-more-div">
+            <button class="read-more-btn" data-modal="bosco-modal"><i class="fa-solid fa-arrow-up-right-from-square material-icon" id="expand-principal-modal" data-modal="bosco-modal" class="read-more-btn"></i></button>
+          </div>
+          
+          
         </div>
       </div>
     </article>
@@ -331,14 +346,19 @@ Read More
             student of Saint John Bosco. He was in the boarding house of Don Bosco when he became ill and died at the
             age of 14. His teacher, John Bosco, had very high regard for Savio, and wrote a biography of his young
             student, <i>The Life of Dominic Savio</i>. This volume, along with other accounts of him, were critical
-            factors in his cause for sainthood ...
+            factors in his cause for sainthood.  he was considered eligible for such singular honour on the basis of his having displayed "heroic virtue" in his everyday life.
+
+            He is the only saint of his age group, which includes Maria Goretti (age 11) and Ponticus of Lyons (age 15) ...
           </p>
-        
-          <button class="read-more-btn" data-modal="savio-modal">Read More</button>
+          <div class="read-more-div">
+            <button class="read-more-btn" data-modal="savio-modal"><i class="fa-solid fa-arrow-up-right-from-square material-icon" id="expand-principal-modal" data-modal="bosco-modal" class="read-more-btn"></i></button>
+          </div>
+          
         </div>
       </div>
     </article>
   </main>
+
   <script>
   document.querySelectorAll(".read-more-btn").forEach(btn => {
     btn.addEventListener("click", () => {
